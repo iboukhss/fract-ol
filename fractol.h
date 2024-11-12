@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:52:57 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/12 13:37:02 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:57:14 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int		key_press(int keycode, t_data *data);
 int		close_window(t_data *data);
 
 void	render_pixel(t_data *img, int x, int y);
-void	render_fractal(t_data *img);
+int		render_fractal(t_data *img);
 
 #endif

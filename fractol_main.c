@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 23:56:50 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/12 12:40:27 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:00:20 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	close_window(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->img);
 	mlx_destroy_window(data->mlx, data->win);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
@@ -105,7 +105,7 @@ void	render_pixel(t_data *img, int x, int y)
 	my_mlx_pixel_put(img, x, y, color);
 }
 
-void	render_fractal(t_data *img)
+int	render_fractal(t_data *img)
 {
 	int	x;
 	int	y;
@@ -121,6 +121,8 @@ void	render_fractal(t_data *img)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	return (0);
 }
 
 int	main(void)
@@ -133,10 +135,11 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
 
 	render_fractal(&img);
-	mlx_put_image_to_window(img.mlx, img.win, img.img, 0, 0);
 
 	mlx_key_hook(img.win, key_press, &img);
 	mlx_hook(img.win, 17, 0, close_window, &img);
+	mlx_expose_hook(img.win, render_fractal, &img);
+
 	mlx_loop(img.mlx);
 	return (0);
 }
