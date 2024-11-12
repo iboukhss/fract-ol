@@ -4,6 +4,7 @@ MLX_DIR = minilibx-linux
 
 CFLAGS = -Wall -Wextra
 CFLAGS += -g3 -fsanitize=address,undefined -MMD
+CFLAGS += -pg
 CFLAGS += -I$(MLX_DIR)
 
 LDLIBS = -L$(MLX_DIR)

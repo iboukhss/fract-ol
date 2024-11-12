@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 23:56:50 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/12 14:00:20 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:35:15 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <mlx.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 // Buffered pixel drawing for increased performance (instead of mlx_pixel_put).
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -58,18 +59,16 @@ int	mandelbrot(double real, double imag, int max_iter)
 	return (iter);
 }
 
-// Generates a grayscale color value based on iteration count.
-// As the iteration count gets closer to max_iter, the color gets lighter.
 int	get_color(int iter, int max_iter)
 {
-	int	color_intensity;
+	int	red;
+	int	green;
+	int	blue;
 
-	if (iter == max_iter)
-	{
-		return (COLOR_BLACK);
-	}
-	color_intensity = (255 * iter) / max_iter;
-	return ((color_intensity << 16) | (color_intensity << 8) | color_intensity);
+	red = (iter * 255) / max_iter;
+	green = (iter * 128) / max_iter;
+	blue = (iter * 64) / max_iter;
+	return ((red << 16) | (green << 8) | blue);
 }
 
 // Key event handler.
@@ -98,8 +97,8 @@ void	render_pixel(t_data *img, int x, int y)
 	int		iter;
 	int		color;
 
-	real = map_to_complex(x, WIDTH, MIN_RE, MAX_RE);
-	imag = map_to_complex(y, HEIGHT, MIN_IM, MAX_IM);
+	real = map_to_complex(x, WIDTH, img->min_re, img->max_re);
+	imag = map_to_complex(y, HEIGHT, img->min_im, img->max_im);
 	iter = mandelbrot(real, imag, MAX_ITER);
 	color = get_color(iter, MAX_ITER);
 	my_mlx_pixel_put(img, x, y, color);
@@ -125,6 +124,38 @@ int	render_fractal(t_data *img)
 	return (0);
 }
 
+int	zoom_fractal(int button, int x, int y, t_data *data)
+{
+	double	zoom_center_re;
+	double	zoom_center_im;
+
+	zoom_center_re = map_to_complex(x, WIDTH, data->min_re, data->max_re);
+	zoom_center_im = map_to_complex(y, HEIGHT, data->min_im, data->max_im);
+	printf("Mouse event at: (%d, %d), button: %d\n", x, y, button);
+	printf("Zoom center: re = %f, im = %f\n", zoom_center_re, zoom_center_im);
+	if (button == 4)
+	{
+		printf("Zooming in\n");
+		data->zoom_factor *= ZOOM_FACTOR;
+		data->min_re = zoom_center_re + (data->min_re - zoom_center_re) / ZOOM_FACTOR;
+		data->max_re = zoom_center_re + (data->max_re - zoom_center_re) / ZOOM_FACTOR;
+		data->min_im = zoom_center_im + (data->min_im - zoom_center_im) / ZOOM_FACTOR;
+		data->max_im = zoom_center_im + (data->max_im - zoom_center_im) / ZOOM_FACTOR;
+	}
+	if (button == 5)
+	{
+		printf("Zooming out\n");
+		data->zoom_factor /= ZOOM_FACTOR;
+		data->min_re = zoom_center_re + (data->min_re - zoom_center_re) * ZOOM_FACTOR;
+		data->max_re = zoom_center_re + (data->max_re - zoom_center_re) * ZOOM_FACTOR;
+		data->min_im = zoom_center_im + (data->min_im - zoom_center_im) * ZOOM_FACTOR;
+		data->max_im = zoom_center_im + (data->max_im - zoom_center_im) * ZOOM_FACTOR;
+	}
+	printf("Zooming at: min_re: %lf, max_re: %lf, min_im: %lf, max_im: %lf\n", data->min_re, data->max_re, data->min_im, data->max_im);
+	render_fractal(data);
+	return (0);
+}
+
 int	main(void)
 {
 	t_data	img;
@@ -134,10 +165,17 @@ int	main(void)
 	img.img = mlx_new_image(img.mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
 
+	img.min_re = MIN_RE;
+	img.max_re = MAX_RE;
+	img.min_im = MIN_IM;
+	img.max_im = MAX_IM;
+	img.zoom_factor = 1.0;
+
 	render_fractal(&img);
 
 	mlx_key_hook(img.win, key_press, &img);
 	mlx_hook(img.win, 17, 0, close_window, &img);
+	mlx_mouse_hook(img.win, zoom_fractal, &img);
 	mlx_expose_hook(img.win, render_fractal, &img);
 
 	mlx_loop(img.mlx);
