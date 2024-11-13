@@ -10,8 +10,8 @@ CFLAGS += -I$(MLX_DIR)
 LDLIBS = -L$(MLX_DIR)
 LDFLAGS = -lmlx -lX11 -lXext -lm
 
-SRCS = fractol_main.c
-INCS = 
+SRCS = f_main.c f_events.c f_render.c f_mandelbrot.c
+INCS = fractol.h
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)
