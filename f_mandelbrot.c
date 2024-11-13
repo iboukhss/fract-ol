@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:23:57 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 03:24:08 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/13 07:51:33 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ int	mandelbrot(double real, double imag, int max_iter)
 	{
 		temp_re = z_re * z_re - z_im * z_im + real;
 		z_im = 2 * z_re * z_im + imag;
+		z_re = temp_re;
+		iter++;
+	}
+	return (iter);
+}
+
+int	julia(double real, double imag, double c_re, double c_im, int max_iter)
+{
+	double	z_re;
+	double	z_im;
+	int		iter;
+	double	temp_re;
+
+	z_re = real;
+	z_im = imag;
+	iter = 0;
+	while ((z_re * z_re + z_im <= ESCAPE_RADIUS) && iter < max_iter)
+	{
+		temp_re = z_re * z_re - z_im * z_im + c_re;
+		z_im = 2 * z_re * z_im + c_im;
 		z_re = temp_re;
 		iter++;
 	}

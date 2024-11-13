@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:22:38 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 03:23:38 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/13 07:55:11 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,14 @@ void	render_pixel(t_data *img, int x, int y)
 
 	real = map_to_complex(x, WIDTH, img->min_re, img->max_re);
 	imag = map_to_complex(y, HEIGHT, img->min_im, img->max_im);
-	iter = mandelbrot(real, imag, MAX_ITER);
+	if (img->frac_type == MANDELBROT)
+	{
+		iter = mandelbrot(real, imag, MAX_ITER);
+	}
+	else
+	{
+		iter = julia(real, imag, img->j_real, img->j_imag, MAX_ITER);
+	}
 	color = get_color(iter, MAX_ITER);
 	my_mlx_pixel_put(img, x, y, color);
 }
