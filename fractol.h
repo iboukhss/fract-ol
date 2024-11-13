@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:52:57 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 11:20:59 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:10:11 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // General settings
 # define WIDTH 800
 # define HEIGHT 800
-# define ASPECT_RATIO ((double)WIDTH / (double)HEIGHT)
 # define ZOOM_FACTOR 1.25
 
 // Magic numbers
@@ -58,8 +57,8 @@ int		close_window(t_data *data);
 int		zoom_fractal(int button, int x, int y, t_data *data);
 
 // Fractal
-int		mandelbrot(double real, double imag, int max_iter);
-int		julia(double real, double imag, double c_re, double c_im, int max_iter);
+int		mandelbrot(double real, double imag);
+int		julia(double real, double imag, double c_re, double c_im);
 double	map_to_complex(int pixel, int size, double min, double max);
 
 // Rendering
