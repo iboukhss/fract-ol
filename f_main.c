@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:08:01 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 11:01:03 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:17:57 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <string.h>
 
+// NOTE: Keeping 3 units on both axes so the fractals don't look "distorted".
 static void	parse_arguments(int argc, char **argv, t_data *img)
 {
 	if (argc == 1)

@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:52:57 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 08:37:38 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:20:59 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define ZOOM_FACTOR 1.25
 
 // Magic numbers
+# define PI 3.14159265358979323846
 # define KEY_ESCAPE 65307
 # define COLOR_BLACK 0x000000
 

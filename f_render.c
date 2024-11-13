@@ -6,13 +6,14 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:22:38 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 07:55:11 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:55:04 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 #include <mlx.h>
+#include <math.h>
 
 // Buffered pixel drawing for increased performance (instead of mlx_pixel_put).
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -26,15 +27,23 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	}
 }
 
+// Function to generate a color with psychedelic rainbow cycling. We are using
+// sine waves to create a rainbow-like effect.
 int	get_color(int iter, int max_iter)
 {
-	int	red;
-	int	green;
-	int	blue;
+	double	t;
+	int		red;
+	int		green;
+	int		blue;
 
-	red = (iter * 255) / max_iter;
-	green = (iter * 128) / max_iter;
-	blue = (iter * 64) / max_iter;
+	if (iter == max_iter)
+	{
+		return (COLOR_BLACK);
+	}
+	t = (double)iter / (double)max_iter;
+	red = (int)(255 * (0.5 * sin(PI * (t + 0.0)) + 0.5));
+	green = (int)(255 * (0.5 * sin(PI * (t + 0.33)) + 0.5));
+	blue = (int)(255 * (0.5 * sin(PI * (t + 0.67)) + 0.5));
 	return ((red << 16) | (green << 8) | blue);
 }
 
