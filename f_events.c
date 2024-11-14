@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:20:52 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/14 17:36:39 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:11:51 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	zoom_fractal(int button, int x, int y, t_data *data)
 	double	zoom_im;
 
 	zoom_re = map_to_complex(x, WIDTH, data->min_re, data->max_re);
-	zoom_im = map_to_complex(y, HEIGHT, data->min_im, data->max_im);
+	zoom_im = map_to_complex(HEIGHT - y, HEIGHT, data->min_im, data->max_im);
 	if (button == 4)
 	{
 		data->zoom_factor *= ZOOM_FACTOR;

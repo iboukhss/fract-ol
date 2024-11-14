@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:22:38 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 16:10:16 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:12:03 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	render_pixel(t_data *img, int x, int y)
 	int		color;
 
 	real = map_to_complex(x, WIDTH, img->min_re, img->max_re);
-	imag = map_to_complex(y, HEIGHT, img->min_im, img->max_im);
+	imag = map_to_complex(HEIGHT - y, HEIGHT, img->min_im, img->max_im);
 	if (img->frac_type == MANDELBROT)
 	{
 		iter = mandelbrot(real, imag);

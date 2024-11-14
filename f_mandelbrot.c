@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:23:57 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 16:10:31 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:00:13 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	julia(double real, double imag, double c_re, double c_im)
 	z_re = real;
 	z_im = imag;
 	iter = 0;
-	while ((z_re * z_re + z_im <= ESCAPE_RADIUS) && iter < MAX_ITER)
+	while ((z_re * z_re + z_im * z_im <= ESCAPE_RADIUS) && iter < MAX_ITER)
 	{
 		temp_re = z_re * z_re - z_im * z_im + c_re;
 		z_im = 2 * z_re * z_im + c_im;
