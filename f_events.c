@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:20:52 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 15:54:48 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:36:39 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	close_window(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->img);
 	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

@@ -19,7 +19,7 @@ DEPS := $(OBJS:.o=.d)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MLX_DIR)/libmlx.a
+$(NAME): $(MLX_DIR)/libmlx.a $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDLIBS) $(LDFLAGS)
 
 $(MLX_DIR)/libmlx.a: $(MLX_DIR)/.git

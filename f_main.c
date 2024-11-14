@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:08:01 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 17:27:14 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:43:23 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 // NOTE: Keeping 3 units on both axes so the fractals don't look "distorted".
 static void	parse_arguments(int argc, char **argv, t_data *img)
 {
-	if (argc == 1)
+	if (argc == 2 && ft_strcmp(argv[1], "-m") == 0)
 	{
 		img->frac_type = MANDELBROT;
 		img->min_re = -2.0;
@@ -46,6 +46,7 @@ static void	parse_arguments(int argc, char **argv, t_data *img)
 	}
 	else
 	{
+		ft_printf("Usage: %s -m\n", argv[0]);
 		ft_printf("Usage: %s -j <real> <imag>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}

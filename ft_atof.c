@@ -6,15 +6,15 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:59:31 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/13 17:25:14 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:34:43 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	parse_sign(char **pos)
+static int	parse_sign(const char **pos)
 {
-	char	*ch;
+	const char	*ch;
 
 	ch = *pos;
 	if (*ch == '+' || *ch == '-')
@@ -28,7 +28,7 @@ static int	parse_sign(char **pos)
 	return (1);
 }
 
-double	ft_atof(char *str)
+double	ft_atof(const char *str)
 {
 	double	result;
 	double	decimal;
