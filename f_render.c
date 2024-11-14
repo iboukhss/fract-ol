@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:22:38 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/14 18:12:03 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:43:20 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	get_color(int iter, int max_iter)
 		return (COLOR_BLACK);
 	}
 	t = (double)iter / (double)max_iter;
-	red = (int)(255 * (0.5 * sin(PI * (t + 0.0)) + 0.5));
-	green = (int)(255 * (0.5 * sin(PI * (t + 0.33)) + 0.5));
-	blue = (int)(255 * (0.5 * sin(PI * (t + 0.67)) + 0.5));
+	red = (int)(255 * (0.5 * sin(PI * (t + 0.80)) + 0.5));
+	green = (int)(255 * (0.5 * sin(PI * (t + 0.50)) + 0.5));
+	blue = (int)(255 * (0.5 * sin(PI * (t + 0.20)) + 0.5));
 	return ((red << 16) | (green << 8) | blue);
 }
 
